@@ -13,9 +13,6 @@
       <main>
         <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
 
-          <!-- Welcome banner -->
-          <WelcomeBanner />
-
           <!-- Dashboard actions -->
           <div class="sm:flex sm:justify-between sm:items-center mb-8">
 
@@ -74,9 +71,6 @@
 
         </div>
       </main>
-
-      <Banner />
-
     </div>
 
   </div>
@@ -86,7 +80,6 @@
 import { ref } from 'vue'
 import Sidebar from '../partials/Sidebar.vue'
 import Header from '../partials/Header.vue'
-import WelcomeBanner from '../partials/dashboard/WelcomeBanner.vue'
 import DashboardAvatars from '../partials/dashboard/DashboardAvatars.vue'
 import FilterButton from '../components/DropdownFilter.vue'
 import Datepicker from '../components/Datepicker.vue'
@@ -103,7 +96,6 @@ import DashboardCard10 from '../partials/dashboard/DashboardCard10.vue'
 import DashboardCard11 from '../partials/dashboard/DashboardCard11.vue'
 import DashboardCard12 from '../partials/dashboard/DashboardCard12.vue'
 import DashboardCard13 from '../partials/dashboard/DashboardCard13.vue'
-import Banner from '../partials/Banner.vue'
 import { Auth } from 'aws-amplify';
 
 export default {
@@ -111,7 +103,6 @@ export default {
   components: {
     Sidebar,
     Header,
-    WelcomeBanner,
     DashboardAvatars,
     FilterButton,
     Datepicker,
@@ -128,7 +119,6 @@ export default {
     DashboardCard11,
     DashboardCard12,
     DashboardCard13,
-    Banner,
   },
   data() {
     return {
@@ -146,7 +136,7 @@ export default {
   },
   async created() {
     try {
-      const user = await Auth.signIn(username, password);
+      const user = await Auth.signIn(this.username, this.password);
       console.log(user);
     } catch (error) {
       console.log('error signing up:', error);
