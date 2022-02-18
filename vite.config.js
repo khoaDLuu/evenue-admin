@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   define: {
     'process.env': process.env
-  },  
+  },
   plugins: [vue()],
   resolve: {
     alias: [
@@ -18,7 +18,11 @@ export default defineConfig({
       {
         find: '@tailwindConfig',
         replacement: () => './src/css/tailwind.config.js',
-      }
+      },
+      {
+        find: './runtimeConfig',
+        replacement: './runtimeConfig.browser',
+      },
     ],
   },
   optimizeDeps: {
