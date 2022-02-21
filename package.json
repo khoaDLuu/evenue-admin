@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@aws-amplify/ui-vue": "^2.1.2",
     "@tailwindcss/forms": "^0.4.0",
     "aws-amplify": "^4.3.14",
     "chart.js": "^3.5.1",

@@ -16,11 +16,11 @@
           </li>
         </EditMenu>
       </header>
-      <h2 class="text-lg font-semibold text-gray-800 mb-2">Acme Plus</h2>
-      <div class="text-xs font-semibold text-gray-400 uppercase mb-1">Sales</div>
+      <h2 class="text-lg font-semibold text-gray-800 mb-2">Users</h2>
+      <div class="text-xs font-semibold text-gray-400 uppercase mb-1">Registered</div>
       <div class="flex items-start">
-        <div class="text-3xl font-bold text-gray-800 mr-2">$24,780</div>
-        <div class="text-sm font-semibold text-white px-1.5 bg-green-500 rounded-full">+49%</div>
+        <div class="text-3xl font-bold text-gray-800 mr-2">5</div>
+        <!-- <div class="text-sm font-semibold text-white px-1.5 bg-green-500 rounded-full">+49%</div> -->
       </div>
     </div>
     <!-- Chart built with Chart.js 3 -->
@@ -98,7 +98,7 @@ export default {
 
     return {
       chartData,
-    } 
+    }
   }
 }
 </script>

@@ -9,7 +9,7 @@
     >
       <img class="w-8 h-8 rounded-full" :src="UserAvatar" width="32" height="32" alt="User" />
       <div class="flex items-center truncate">
-        <span class="truncate ml-2 text-sm font-medium group-hover:text-gray-800">Acme Inc.</span>
+        <span class="truncate ml-2 text-sm font-medium group-hover:text-gray-800">Evenue</span>
         <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-gray-400" viewBox="0 0 12 12">
           <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
         </svg>
@@ -25,7 +25,7 @@
     >
       <div v-show="dropdownOpen" class="origin-top-right z-10 absolute top-full min-w-44 bg-white border border-gray-200 py-1.5 rounded shadow-lg overflow-hidden mt-1" :class="align === 'right' ? 'right-0' : 'left-0'">
         <div class="pt-0.5 pb-2 px-3 mb-1 border-b border-gray-200">
-          <div class="font-medium text-gray-800">Acme Inc.</div>
+          <div class="font-medium text-gray-800">Evenue</div>
           <div class="text-xs text-gray-500 italic">Administrator</div>
         </div>
         <ul
@@ -37,17 +37,21 @@
             <router-link class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3" to="/" @click="dropdownOpen = false">Settings</router-link>
           </li>
           <li>
-            <router-link class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3" to="/" @click="dropdownOpen = false">Sign Out</router-link>
+            <router-link class="font-medium text-sm text-indigo-500 hover:text-indigo-600 flex items-center py-1 px-3" to="/" @click="auth.signOut">Sign Out</router-link>
           </li>
         </ul>
-      </div> 
+      </div>
     </transition>
   </div>
 </template>
 
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
-import UserAvatar from '../images/user-avatar-32.png'
+import UserAvatar from '../images/logo_bg.png'
+import { useAuthenticator } from '@aws-amplify/ui-vue'
+
+const cslog = console.log
+const x = true
 
 export default {
   name: 'DropdownProfile',
@@ -55,13 +59,17 @@ export default {
   data() {
     return {
       UserAvatar: UserAvatar,
+      auth: undefined,
     }
-  },  
+  },
   setup() {
 
     const dropdownOpen = ref(false)
     const trigger = ref(null)
     const dropdown = ref(null)
+
+    const auth = useAuthenticator();
+    cslog(auth)
 
     // close on click outside
     const clickHandler = ({ target }) => {
@@ -89,6 +97,7 @@ export default {
       dropdownOpen,
       trigger,
       dropdown,
+      auth,
     }
   }
 }

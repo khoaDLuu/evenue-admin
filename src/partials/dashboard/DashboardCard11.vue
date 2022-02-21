@@ -1,7 +1,7 @@
 <template>
   <div class="col-span-full xl:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
     <header class="px-5 py-4 border-b border-gray-100">
-      <h2 class="font-semibold text-gray-800">Reason for Refunds</h2>
+      <h2 class="font-semibold text-gray-800">Bookings by status</h2>
     </header>
     <div class="px-5 py-3">
       <div class="flex items-start">
@@ -28,7 +28,7 @@ export default {
   name: 'DashboardCard11',
   components: {
     BarChart,
-  },  
+  },
   setup() {
     const chartData = ref({
       labels: ['Reasons'],
@@ -78,7 +78,7 @@ export default {
 
     return {
       chartData,
-    } 
+    }
   }
 }
 </script>

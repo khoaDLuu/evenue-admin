@@ -54,7 +54,7 @@
             </router-link>
           </li>
         </ul>
-      </div> 
+      </div>
     </transition>
   </div>
 </template>

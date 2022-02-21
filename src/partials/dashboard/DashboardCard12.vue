@@ -1,7 +1,7 @@
 <template>
   <div class="col-span-full xl:col-span-6 bg-white shadow-lg rounded-sm border border-gray-200">
     <header class="px-5 py-4 border-b border-gray-100">
-      <h2 class="font-semibold text-gray-800">Recent Activity</h2>
+      <h2 class="font-semibold text-gray-800">Recent Events</h2>
     </header>
     <div class="p-3">
 
