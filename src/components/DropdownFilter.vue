@@ -7,7 +7,7 @@
       @click.prevent="dropdownOpen = !dropdownOpen"
       :aria-expanded="dropdownOpen"
     >
-      <span class="sr-only">Filter</span><wbr />
+      <span class="sr-only">Sort By</span><wbr />
       <svg class="w-4 h-4 fill-current" viewBox="0 0 16 16">
         <path d="M9 15H7a1 1 0 010-2h2a1 1 0 010 2zM11 11H5a1 1 0 010-2h6a1 1 0 010 2zM13 7H3a1 1 0 010-2h10a1 1 0 010 2zM15 3H1a1 1 0 010-2h14a1 1 0 010 2z" />
       </svg>
@@ -22,42 +22,48 @@
     >
       <div v-show="dropdownOpen" class="origin-top-right z-10 absolute top-full min-w-56 bg-white border border-gray-200 pt-1.5 rounded shadow-lg overflow-hidden mt-1" :class="align === 'right' ? 'right-0' : 'left-0'">
         <div ref="dropdown">
-          <div class="text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4">Filters</div>
+          <div class="text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4">Sort By</div>
           <ul class="mb-4">
             <li class="py-1 px-3">
               <label class="flex items-center">
-                <input type="checkbox" class="form-checkbox" />
-                <span class="text-sm font-medium ml-2">Direct VS Indirect</span>
+                <input type="radio" name="sortName" class="form-radio" />
+                <span class="text-sm font-medium ml-2">Name &#8599;</span>
               </label>
             </li>
             <li class="py-1 px-3">
               <label class="flex items-center">
-                <input type="checkbox" class="form-checkbox" />
-                <span class="text-sm font-medium ml-2">Real Time Value</span>
+                <input type="radio" name="sortName" class="form-radio" />
+                <span class="text-sm font-medium ml-2">Name &#8600;</span>
               </label>
             </li>
             <li class="py-1 px-3">
               <label class="flex items-center">
-                <input type="checkbox" class="form-checkbox" />
-                <span class="text-sm font-medium ml-2">Top Channels</span>
+                <input type="radio" name="sortName" class="form-radio" />
+                <span class="text-sm font-medium ml-2">City</span>
               </label>
             </li>
             <li class="py-1 px-3">
               <label class="flex items-center">
-                <input type="checkbox" class="form-checkbox" />
-                <span class="text-sm font-medium ml-2">Sales VS Refunds</span>
+                <input type="radio" name="sortName" class="form-radio" />
+                <span class="text-sm font-medium ml-2">Type</span>
               </label>
             </li>
             <li class="py-1 px-3">
               <label class="flex items-center">
-                <input type="checkbox" class="form-checkbox" />
-                <span class="text-sm font-medium ml-2">Last Order</span>
+                <input type="radio" name="sortName" class="form-radio" />
+                <span class="text-sm font-medium ml-2">Owner Email</span>
               </label>
             </li>
             <li class="py-1 px-3">
               <label class="flex items-center">
-                <input type="checkbox" class="form-checkbox" />
-                <span class="text-sm font-medium ml-2">Total Spent</span>
+                <input type="radio" name="sortName" class="form-radio" />
+                <span class="text-sm font-medium ml-2">Date Created &#8599;</span>
+              </label>
+            </li>
+            <li class="py-1 px-3">
+              <label class="flex items-center">
+                <input type="radio" name="sortName" class="form-radio" />
+                <span class="text-sm font-medium ml-2">Date Created &#8600;</span>
               </label>
             </li>
           </ul>
@@ -70,7 +76,7 @@
                 <button class="btn-xs bg-indigo-500 hover:bg-indigo-600 text-white" @click="dropdownOpen = false" @focusout="dropdownOpen = false">Apply</button>
               </li>
             </ul>
-          </div>          
+          </div>
         </div>
       </div>
     </transition>

@@ -51,7 +51,6 @@ import UserAvatar from '../images/logo_bg.png'
 import { useAuthenticator } from '@aws-amplify/ui-vue'
 
 const cslog = console.log
-const x = true
 
 export default {
   name: 'DropdownProfile',

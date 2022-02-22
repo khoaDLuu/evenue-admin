@@ -23,9 +23,9 @@
             <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
 
               <!-- Filter button -->
-              <!-- <FilterButton align="right" /> -->
+              <FilterButton align="right" />
               <!-- Datepicker built with flatpickr -->
-              <Datepicker align="left" />
+              <Datepicker align="left" @date-range-picked="updateList" />
               <!-- Add view button -->
               <!-- <button class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
                   <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
@@ -38,7 +38,7 @@
           </div>
 
           <!-- Venue List -->
-          <DashboardCard07 />
+          <DashboardCard07 :venues="venuesShowned" />
 
         </div>
       </main>
@@ -54,7 +54,10 @@ import Header from '../partials/Header.vue'
 import FilterButton from '../components/DropdownFilter.vue'
 import Datepicker from '../components/Datepicker.vue'
 import DashboardCard07 from '../partials/dashboard/DashboardCard07.vue'
-import { Auth, API } from 'aws-amplify';
+import { API } from "aws-amplify"
+import { listVenues } from "../graphql/queries"
+
+const cslog = console.log
 
 export default {
   name: 'Dashboard',
@@ -67,11 +70,28 @@ export default {
   },
   data() {
     return {
-      username: "dangkhoa240899@gmail.com",
-      password: "khoa12345678",
-      email: "dangkhoa240899@gmail.com",
-      phone_number: "",
+      venues: [],
+      venuesShowned: [],
     }
+  },
+  async created() {
+    const venuesRes = await API.graphql({
+      query: listVenues,
+    })
+
+    cslog(venuesRes)
+    const allVenues = venuesRes.data.listVenues.items // .filter(v => v.published).filter(v => filterF(v))
+
+    this.venues = allVenues
+    this.venuesShowned = allVenues
+  },
+  methods: {
+    updateList([startDate, endDate]) {
+      this.venuesShowned = this.venues.filter(v =>
+        new Date(v.createdAt).getTime() >= startDate.getTime()
+        && new Date(v.createdAt).getTime() <= endDate.getTime()
+      )
+    },
   },
   setup() {
     const sidebarOpen = ref(false)

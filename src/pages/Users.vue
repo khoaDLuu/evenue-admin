@@ -23,9 +23,9 @@
             <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
 
               <!-- Filter button -->
-              <!-- <FilterButton align="right" /> -->
+              <FilterButton align="right" />
               <!-- Datepicker built with flatpickr -->
-              <Datepicker align="left" />
+              <Datepicker align="left" @date-range-picked="updateList" />
               <!-- Add view button -->
               <!-- <button class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
                   <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
@@ -38,7 +38,7 @@
           </div>
 
           <!-- User List -->
-          <DashboardCard10 />
+          <DashboardCard10 :users="usersShowned" />
 
         </div>
       </main>
@@ -55,6 +55,9 @@ import FilterButton from '../components/DropdownFilter.vue'
 import Datepicker from '../components/Datepicker.vue'
 import DashboardCard10 from '../partials/dashboard/DashboardCard10.vue'
 import { Auth, API } from 'aws-amplify';
+// import { listUsers } from "../graphql/queries"  // list users / admin queries
+
+const cslog = console.log
 
 export default {
   name: 'Dashboard',
@@ -67,12 +70,29 @@ export default {
   },
   data() {
     return {
-      username: "dangkhoa240899@gmail.com",
-      password: "khoa12345678",
-      email: "dangkhoa240899@gmail.com",
-      phone_number: "",
+      users: [],
+      usersShowned: [],
     }
   },
+  // async created() {
+  //   const usersRes = await API.graphql({
+  //     query: listUsers,
+  //   })
+
+  //   cslog(usersRes)
+  //   const allUsers = usersRes.data.listUsers.items // .filter(v => v.published).filter(v => filterF(v))
+
+  //   this.users = allUsers
+  //   this.usersShowned = allUsers
+  // },
+  // methods: {
+  //   updateList([startDate, endDate]) {
+  //     this.usersShowned = this.users.filter(v =>
+  //       new Date(v.createdAt).getTime() >= startDate.getTime()
+  //       && new Date(v.createdAt).getTime() <= endDate.getTime()
+  //     )
+  //   },
+  // },
   setup() {
     const sidebarOpen = ref(false)
     return {

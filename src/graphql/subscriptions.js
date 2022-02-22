@@ -4,6 +4,7 @@
 export const onCreateUser = /* GraphQL */ `
   subscription OnCreateUser($owner: String) {
     onCreateUser(owner: $owner) {
+      id
       name
       profile {
         firstName
@@ -12,13 +13,65 @@ export const onCreateUser = /* GraphQL */ `
         phone
         picture {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -27,7 +80,6 @@ export const onCreateUser = /* GraphQL */ `
         }
         nextToken
       }
-      id
       createdAt
       updatedAt
       owner
@@ -37,6 +89,7 @@ export const onCreateUser = /* GraphQL */ `
 export const onUpdateUser = /* GraphQL */ `
   subscription OnUpdateUser($owner: String) {
     onUpdateUser(owner: $owner) {
+      id
       name
       profile {
         firstName
@@ -45,13 +98,65 @@ export const onUpdateUser = /* GraphQL */ `
         phone
         picture {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -60,7 +165,6 @@ export const onUpdateUser = /* GraphQL */ `
         }
         nextToken
       }
-      id
       createdAt
       updatedAt
       owner
@@ -70,6 +174,7 @@ export const onUpdateUser = /* GraphQL */ `
 export const onDeleteUser = /* GraphQL */ `
   subscription OnDeleteUser($owner: String) {
     onDeleteUser(owner: $owner) {
+      id
       name
       profile {
         firstName
@@ -78,13 +183,65 @@ export const onDeleteUser = /* GraphQL */ `
         phone
         picture {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -93,7 +250,6 @@ export const onDeleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      id
       createdAt
       updatedAt
       owner
@@ -153,9 +309,51 @@ export const onCreateVenue = /* GraphQL */ `
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -223,9 +421,51 @@ export const onUpdateVenue = /* GraphQL */ `
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -293,9 +533,51 @@ export const onDeleteVenue = /* GraphQL */ `
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -313,6 +595,7 @@ export const onDeleteVenue = /* GraphQL */ `
 export const onCreateReview = /* GraphQL */ `
   subscription OnCreateReview($owner: String) {
     onCreateReview(owner: $owner) {
+      id
       venue {
         id
         name
@@ -320,11 +603,26 @@ export const onCreateReview = /* GraphQL */ `
         description
         photos {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
         address
         city
         pricing {
           currency
+          perHour {
+            startHour
+            endHour
+            price
+          }
           perDay
         }
         type {
@@ -348,31 +646,39 @@ export const onCreateReview = /* GraphQL */ `
           endHour
         }
         reviews {
+          items {
+            id
+            venue {
+              id
+              name
+              headline
+              description
+              address
+              city
+              eventTypes
+              published
+              owner
+              createdAt
+              updatedAt
+            }
+            user
+            rating
+            comment
+            createdAt
+            updatedAt
+            userReviewsId
+            venueReviewsId
+            owner
+          }
           nextToken
         }
         owner
         createdAt
         updatedAt
       }
-      user {
-        name
-        profile {
-          firstName
-          lastName
-          email
-          phone
-        }
-        reviews {
-          nextToken
-        }
-        id
-        createdAt
-        updatedAt
-        owner
-      }
+      user
       rating
       comment
-      id
       createdAt
       updatedAt
       userReviewsId
@@ -384,6 +690,7 @@ export const onCreateReview = /* GraphQL */ `
 export const onUpdateReview = /* GraphQL */ `
   subscription OnUpdateReview($owner: String) {
     onUpdateReview(owner: $owner) {
+      id
       venue {
         id
         name
@@ -391,11 +698,26 @@ export const onUpdateReview = /* GraphQL */ `
         description
         photos {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
         address
         city
         pricing {
           currency
+          perHour {
+            startHour
+            endHour
+            price
+          }
           perDay
         }
         type {
@@ -419,31 +741,39 @@ export const onUpdateReview = /* GraphQL */ `
           endHour
         }
         reviews {
+          items {
+            id
+            venue {
+              id
+              name
+              headline
+              description
+              address
+              city
+              eventTypes
+              published
+              owner
+              createdAt
+              updatedAt
+            }
+            user
+            rating
+            comment
+            createdAt
+            updatedAt
+            userReviewsId
+            venueReviewsId
+            owner
+          }
           nextToken
         }
         owner
         createdAt
         updatedAt
       }
-      user {
-        name
-        profile {
-          firstName
-          lastName
-          email
-          phone
-        }
-        reviews {
-          nextToken
-        }
-        id
-        createdAt
-        updatedAt
-        owner
-      }
+      user
       rating
       comment
-      id
       createdAt
       updatedAt
       userReviewsId
@@ -455,6 +785,7 @@ export const onUpdateReview = /* GraphQL */ `
 export const onDeleteReview = /* GraphQL */ `
   subscription OnDeleteReview($owner: String) {
     onDeleteReview(owner: $owner) {
+      id
       venue {
         id
         name
@@ -462,11 +793,26 @@ export const onDeleteReview = /* GraphQL */ `
         description
         photos {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
         address
         city
         pricing {
           currency
+          perHour {
+            startHour
+            endHour
+            price
+          }
           perDay
         }
         type {
@@ -490,31 +836,39 @@ export const onDeleteReview = /* GraphQL */ `
           endHour
         }
         reviews {
+          items {
+            id
+            venue {
+              id
+              name
+              headline
+              description
+              address
+              city
+              eventTypes
+              published
+              owner
+              createdAt
+              updatedAt
+            }
+            user
+            rating
+            comment
+            createdAt
+            updatedAt
+            userReviewsId
+            venueReviewsId
+            owner
+          }
           nextToken
         }
         owner
         createdAt
         updatedAt
       }
-      user {
-        name
-        profile {
-          firstName
-          lastName
-          email
-          phone
-        }
-        reviews {
-          nextToken
-        }
-        id
-        createdAt
-        updatedAt
-        owner
-      }
+      user
       rating
       comment
-      id
       createdAt
       updatedAt
       userReviewsId
@@ -526,6 +880,7 @@ export const onDeleteReview = /* GraphQL */ `
 export const onCreateBooking = /* GraphQL */ `
   subscription OnCreateBooking($owner: String) {
     onCreateBooking(owner: $owner) {
+      id
       venueId
       user
       checkIn
@@ -543,7 +898,6 @@ export const onCreateBooking = /* GraphQL */ `
       paymentCurrency
       paymentToken
       status
-      id
       createdAt
       updatedAt
       owner
@@ -553,6 +907,7 @@ export const onCreateBooking = /* GraphQL */ `
 export const onUpdateBooking = /* GraphQL */ `
   subscription OnUpdateBooking($owner: String) {
     onUpdateBooking(owner: $owner) {
+      id
       venueId
       user
       checkIn
@@ -570,7 +925,6 @@ export const onUpdateBooking = /* GraphQL */ `
       paymentCurrency
       paymentToken
       status
-      id
       createdAt
       updatedAt
       owner
@@ -580,6 +934,7 @@ export const onUpdateBooking = /* GraphQL */ `
 export const onDeleteBooking = /* GraphQL */ `
   subscription OnDeleteBooking($owner: String) {
     onDeleteBooking(owner: $owner) {
+      id
       venueId
       user
       checkIn
@@ -597,7 +952,6 @@ export const onDeleteBooking = /* GraphQL */ `
       paymentCurrency
       paymentToken
       status
-      id
       createdAt
       updatedAt
       owner

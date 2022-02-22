@@ -41,29 +41,77 @@ export const recommendVenues = /* GraphQL */ `
         recommendedGuestCount
       }
       reviews {
+        id
         venue {
           id
           name
           headline
           description
+          photos {
+            name
+            fullsize {
+              region
+              bucket
+              key
+            }
+            thumbnails {
+              region
+              bucket
+              key
+            }
+          }
           address
           city
+          pricing {
+            currency
+            perHour {
+              startHour
+              endHour
+              price
+            }
+            perDay
+          }
+          type {
+            name
+          }
           eventTypes
           published
+          extras {
+            name
+            type
+            price
+          }
+          capacity {
+            unit
+            floorSize
+            recommendedGuestCount
+          }
+          operatingHours {
+            daysOfWeek
+            startHour
+            endHour
+          }
+          reviews {
+            items {
+              id
+              user
+              rating
+              comment
+              createdAt
+              updatedAt
+              userReviewsId
+              venueReviewsId
+              owner
+            }
+            nextToken
+          }
           owner
           createdAt
           updatedAt
         }
-        user {
-          name
-          id
-          createdAt
-          updatedAt
-          owner
-        }
+        user
         rating
         comment
-        id
         createdAt
         updatedAt
         userReviewsId
@@ -77,6 +125,7 @@ export const recommendVenues = /* GraphQL */ `
 export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
+      id
       name
       profile {
         firstName
@@ -85,13 +134,65 @@ export const getUser = /* GraphQL */ `
         phone
         picture {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -100,7 +201,6 @@ export const getUser = /* GraphQL */ `
         }
         nextToken
       }
-      id
       createdAt
       updatedAt
       owner
@@ -115,17 +215,54 @@ export const listUsers = /* GraphQL */ `
   ) {
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         name
         profile {
           firstName
           lastName
           email
           phone
+          picture {
+            name
+            fullsize {
+              region
+              bucket
+              key
+            }
+            thumbnails {
+              region
+              bucket
+              key
+            }
+          }
         }
         reviews {
+          items {
+            id
+            venue {
+              id
+              name
+              headline
+              description
+              address
+              city
+              eventTypes
+              published
+              owner
+              createdAt
+              updatedAt
+            }
+            user
+            rating
+            comment
+            createdAt
+            updatedAt
+            userReviewsId
+            venueReviewsId
+            owner
+          }
           nextToken
         }
-        id
         createdAt
         updatedAt
         owner
@@ -187,9 +324,51 @@ export const getVenue = /* GraphQL */ `
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -218,11 +397,26 @@ export const listVenues = /* GraphQL */ `
         description
         photos {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
         address
         city
         pricing {
           currency
+          perHour {
+            startHour
+            endHour
+            price
+          }
           perDay
         }
         type {
@@ -246,6 +440,30 @@ export const listVenues = /* GraphQL */ `
           endHour
         }
         reviews {
+          items {
+            id
+            venue {
+              id
+              name
+              headline
+              description
+              address
+              city
+              eventTypes
+              published
+              owner
+              createdAt
+              updatedAt
+            }
+            user
+            rating
+            comment
+            createdAt
+            updatedAt
+            userReviewsId
+            venueReviewsId
+            owner
+          }
           nextToken
         }
         owner
@@ -259,6 +477,7 @@ export const listVenues = /* GraphQL */ `
 export const getReview = /* GraphQL */ `
   query GetReview($id: ID!) {
     getReview(id: $id) {
+      id
       venue {
         id
         name
@@ -266,11 +485,26 @@ export const getReview = /* GraphQL */ `
         description
         photos {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
         address
         city
         pricing {
           currency
+          perHour {
+            startHour
+            endHour
+            price
+          }
           perDay
         }
         type {
@@ -294,31 +528,39 @@ export const getReview = /* GraphQL */ `
           endHour
         }
         reviews {
+          items {
+            id
+            venue {
+              id
+              name
+              headline
+              description
+              address
+              city
+              eventTypes
+              published
+              owner
+              createdAt
+              updatedAt
+            }
+            user
+            rating
+            comment
+            createdAt
+            updatedAt
+            userReviewsId
+            venueReviewsId
+            owner
+          }
           nextToken
         }
         owner
         createdAt
         updatedAt
       }
-      user {
-        name
-        profile {
-          firstName
-          lastName
-          email
-          phone
-        }
-        reviews {
-          nextToken
-        }
-        id
-        createdAt
-        updatedAt
-        owner
-      }
+      user
       rating
       comment
-      id
       createdAt
       updatedAt
       userReviewsId
@@ -335,29 +577,77 @@ export const listReviews = /* GraphQL */ `
   ) {
     listReviews(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         venue {
           id
           name
           headline
           description
+          photos {
+            name
+            fullsize {
+              region
+              bucket
+              key
+            }
+            thumbnails {
+              region
+              bucket
+              key
+            }
+          }
           address
           city
+          pricing {
+            currency
+            perHour {
+              startHour
+              endHour
+              price
+            }
+            perDay
+          }
+          type {
+            name
+          }
           eventTypes
           published
+          extras {
+            name
+            type
+            price
+          }
+          capacity {
+            unit
+            floorSize
+            recommendedGuestCount
+          }
+          operatingHours {
+            daysOfWeek
+            startHour
+            endHour
+          }
+          reviews {
+            items {
+              id
+              user
+              rating
+              comment
+              createdAt
+              updatedAt
+              userReviewsId
+              venueReviewsId
+              owner
+            }
+            nextToken
+          }
           owner
           createdAt
           updatedAt
         }
-        user {
-          name
-          id
-          createdAt
-          updatedAt
-          owner
-        }
+        user
         rating
         comment
-        id
         createdAt
         updatedAt
         userReviewsId
@@ -371,6 +661,7 @@ export const listReviews = /* GraphQL */ `
 export const getBooking = /* GraphQL */ `
   query GetBooking($id: ID!) {
     getBooking(id: $id) {
+      id
       venueId
       user
       checkIn
@@ -388,7 +679,6 @@ export const getBooking = /* GraphQL */ `
       paymentCurrency
       paymentToken
       status
-      id
       createdAt
       updatedAt
       owner
@@ -403,19 +693,24 @@ export const listBookings = /* GraphQL */ `
   ) {
     listBookings(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         venueId
         user
         checkIn
         checkOut
         guestCount
         extras {
+          extra {
+            name
+            type
+            price
+          }
           number
         }
         totalCharge
         paymentCurrency
         paymentToken
         status
-        id
         createdAt
         updatedAt
         owner

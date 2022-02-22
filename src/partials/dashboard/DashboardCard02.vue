@@ -19,7 +19,7 @@
       <h2 class="text-lg font-semibold text-gray-800 mb-2">Venues</h2>
       <div class="text-xs font-semibold text-gray-400 uppercase mb-1">Published</div>
       <div class="flex items-start">
-        <div class="text-3xl font-bold text-gray-800 mr-2">7</div>
+        <div class="text-3xl font-bold text-gray-800 mr-2">10</div>
         <!-- <div class="text-sm font-semibold text-white px-1.5 bg-yellow-500 rounded-full">-14%</div> -->
       </div>
     </div>

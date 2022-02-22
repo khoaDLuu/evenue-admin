@@ -19,7 +19,7 @@
       <h2 class="text-lg font-semibold text-gray-800 mb-2">Bookings</h2>
       <div class="text-xs font-semibold text-gray-400 uppercase mb-1">Created</div>
       <div class="flex items-start">
-        <div class="text-3xl font-bold text-gray-800 mr-2">5</div>
+        <div class="text-3xl font-bold text-gray-800 mr-2">16</div>
         <!-- <div class="text-sm font-semibold text-white px-1.5 bg-green-500 rounded-full">+29%</div> -->
       </div>
     </div>

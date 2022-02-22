@@ -3,7 +3,7 @@
 
 const awsmobile = {
     "aws_project_region": "us-east-1",
-    "aws_cognito_identity_pool_id": "us-east-1:caeb9a47-f950-4f3d-a93c-5c684fbab01a",
+    "aws_cognito_identity_pool_id": "us-east-1:ae6099d2-d36b-46ac-8c0c-6e466351c071",
     "aws_cognito_region": "us-east-1",
     "aws_user_pools_id": "us-east-1_0UgU6K4E3",
     "aws_user_pools_web_client_id": "5d201n2a38lcl6rmum6nj38bj3",
@@ -28,6 +28,13 @@ const awsmobile = {
     "aws_appsync_region": "us-east-1",
     "aws_appsync_authenticationType": "AMAZON_COGNITO_USER_POOLS",
     "aws_appsync_apiKey": "da2-3iho3euo4ncpncldb2umka2dee",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "AdminQueries",
+            "endpoint": "https://7nqtp92del.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
+        }
+    ],
     "aws_content_delivery_bucket": "evenuefshb-dev",
     "aws_content_delivery_bucket_region": "us-east-1",
     "aws_content_delivery_url": "https://d3bk0ejig4ycn5.cloudfront.net",

@@ -12,6 +12,7 @@ export const createUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     createUser(input: $input, condition: $condition) {
+      id
       name
       profile {
         firstName
@@ -20,13 +21,65 @@ export const createUser = /* GraphQL */ `
         phone
         picture {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -35,7 +88,6 @@ export const createUser = /* GraphQL */ `
         }
         nextToken
       }
-      id
       createdAt
       updatedAt
       owner
@@ -48,6 +100,7 @@ export const updateUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     updateUser(input: $input, condition: $condition) {
+      id
       name
       profile {
         firstName
@@ -56,13 +109,65 @@ export const updateUser = /* GraphQL */ `
         phone
         picture {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -71,7 +176,6 @@ export const updateUser = /* GraphQL */ `
         }
         nextToken
       }
-      id
       createdAt
       updatedAt
       owner
@@ -84,6 +188,7 @@ export const deleteUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     deleteUser(input: $input, condition: $condition) {
+      id
       name
       profile {
         firstName
@@ -92,13 +197,65 @@ export const deleteUser = /* GraphQL */ `
         phone
         picture {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -107,7 +264,6 @@ export const deleteUser = /* GraphQL */ `
         }
         nextToken
       }
-      id
       createdAt
       updatedAt
       owner
@@ -170,9 +326,51 @@ export const createVenue = /* GraphQL */ `
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -243,9 +441,51 @@ export const updateVenue = /* GraphQL */ `
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -316,9 +556,51 @@ export const deleteVenue = /* GraphQL */ `
       }
       reviews {
         items {
+          id
+          venue {
+            id
+            name
+            headline
+            description
+            photos {
+              name
+            }
+            address
+            city
+            pricing {
+              currency
+              perDay
+            }
+            type {
+              name
+            }
+            eventTypes
+            published
+            extras {
+              name
+              type
+              price
+            }
+            capacity {
+              unit
+              floorSize
+              recommendedGuestCount
+            }
+            operatingHours {
+              daysOfWeek
+              startHour
+              endHour
+            }
+            reviews {
+              nextToken
+            }
+            owner
+            createdAt
+            updatedAt
+          }
+          user
           rating
           comment
-          id
           createdAt
           updatedAt
           userReviewsId
@@ -339,6 +621,7 @@ export const createReview = /* GraphQL */ `
     $condition: ModelReviewConditionInput
   ) {
     createReview(input: $input, condition: $condition) {
+      id
       venue {
         id
         name
@@ -346,11 +629,26 @@ export const createReview = /* GraphQL */ `
         description
         photos {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
         address
         city
         pricing {
           currency
+          perHour {
+            startHour
+            endHour
+            price
+          }
           perDay
         }
         type {
@@ -374,31 +672,39 @@ export const createReview = /* GraphQL */ `
           endHour
         }
         reviews {
+          items {
+            id
+            venue {
+              id
+              name
+              headline
+              description
+              address
+              city
+              eventTypes
+              published
+              owner
+              createdAt
+              updatedAt
+            }
+            user
+            rating
+            comment
+            createdAt
+            updatedAt
+            userReviewsId
+            venueReviewsId
+            owner
+          }
           nextToken
         }
         owner
         createdAt
         updatedAt
       }
-      user {
-        name
-        profile {
-          firstName
-          lastName
-          email
-          phone
-        }
-        reviews {
-          nextToken
-        }
-        id
-        createdAt
-        updatedAt
-        owner
-      }
+      user
       rating
       comment
-      id
       createdAt
       updatedAt
       userReviewsId
@@ -413,6 +719,7 @@ export const updateReview = /* GraphQL */ `
     $condition: ModelReviewConditionInput
   ) {
     updateReview(input: $input, condition: $condition) {
+      id
       venue {
         id
         name
@@ -420,11 +727,26 @@ export const updateReview = /* GraphQL */ `
         description
         photos {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
         address
         city
         pricing {
           currency
+          perHour {
+            startHour
+            endHour
+            price
+          }
           perDay
         }
         type {
@@ -448,31 +770,39 @@ export const updateReview = /* GraphQL */ `
           endHour
         }
         reviews {
+          items {
+            id
+            venue {
+              id
+              name
+              headline
+              description
+              address
+              city
+              eventTypes
+              published
+              owner
+              createdAt
+              updatedAt
+            }
+            user
+            rating
+            comment
+            createdAt
+            updatedAt
+            userReviewsId
+            venueReviewsId
+            owner
+          }
           nextToken
         }
         owner
         createdAt
         updatedAt
       }
-      user {
-        name
-        profile {
-          firstName
-          lastName
-          email
-          phone
-        }
-        reviews {
-          nextToken
-        }
-        id
-        createdAt
-        updatedAt
-        owner
-      }
+      user
       rating
       comment
-      id
       createdAt
       updatedAt
       userReviewsId
@@ -487,6 +817,7 @@ export const deleteReview = /* GraphQL */ `
     $condition: ModelReviewConditionInput
   ) {
     deleteReview(input: $input, condition: $condition) {
+      id
       venue {
         id
         name
@@ -494,11 +825,26 @@ export const deleteReview = /* GraphQL */ `
         description
         photos {
           name
+          fullsize {
+            region
+            bucket
+            key
+          }
+          thumbnails {
+            region
+            bucket
+            key
+          }
         }
         address
         city
         pricing {
           currency
+          perHour {
+            startHour
+            endHour
+            price
+          }
           perDay
         }
         type {
@@ -522,31 +868,39 @@ export const deleteReview = /* GraphQL */ `
           endHour
         }
         reviews {
+          items {
+            id
+            venue {
+              id
+              name
+              headline
+              description
+              address
+              city
+              eventTypes
+              published
+              owner
+              createdAt
+              updatedAt
+            }
+            user
+            rating
+            comment
+            createdAt
+            updatedAt
+            userReviewsId
+            venueReviewsId
+            owner
+          }
           nextToken
         }
         owner
         createdAt
         updatedAt
       }
-      user {
-        name
-        profile {
-          firstName
-          lastName
-          email
-          phone
-        }
-        reviews {
-          nextToken
-        }
-        id
-        createdAt
-        updatedAt
-        owner
-      }
+      user
       rating
       comment
-      id
       createdAt
       updatedAt
       userReviewsId
@@ -561,6 +915,7 @@ export const createBooking = /* GraphQL */ `
     $condition: ModelBookingConditionInput
   ) {
     createBooking(input: $input, condition: $condition) {
+      id
       venueId
       user
       checkIn
@@ -578,7 +933,6 @@ export const createBooking = /* GraphQL */ `
       paymentCurrency
       paymentToken
       status
-      id
       createdAt
       updatedAt
       owner
@@ -591,6 +945,7 @@ export const updateBooking = /* GraphQL */ `
     $condition: ModelBookingConditionInput
   ) {
     updateBooking(input: $input, condition: $condition) {
+      id
       venueId
       user
       checkIn
@@ -608,7 +963,6 @@ export const updateBooking = /* GraphQL */ `
       paymentCurrency
       paymentToken
       status
-      id
       createdAt
       updatedAt
       owner
@@ -621,6 +975,7 @@ export const deleteBooking = /* GraphQL */ `
     $condition: ModelBookingConditionInput
   ) {
     deleteBooking(input: $input, condition: $condition) {
+      id
       venueId
       user
       checkIn
@@ -638,7 +993,6 @@ export const deleteBooking = /* GraphQL */ `
       paymentCurrency
       paymentToken
       status
-      id
       createdAt
       updatedAt
       owner

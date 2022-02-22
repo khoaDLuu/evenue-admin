@@ -23,9 +23,9 @@
             <div class="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
 
               <!-- Filter button -->
-              <!-- <FilterButton align="right" /> -->
+              <FilterButton align="right" />
               <!-- Datepicker built with flatpickr -->
-              <Datepicker align="left" />
+              <Datepicker align="left" @date-range-picked="updateList" />
               <!-- Add view button -->
               <!-- <button class="btn bg-indigo-500 hover:bg-indigo-600 text-white">
                   <svg class="w-4 h-4 fill-current opacity-50 shrink-0" viewBox="0 0 16 16">
@@ -38,7 +38,7 @@
           </div>
 
           <!-- Booking List -->
-          <DashboardCard07 />
+          <DashboardCard07B :bookings="bookingsShowned" />
 
         </div>
       </main>
@@ -53,8 +53,11 @@ import Sidebar from '../partials/Sidebar.vue'
 import Header from '../partials/Header.vue'
 import FilterButton from '../components/DropdownFilter.vue'
 import Datepicker from '../components/Datepicker.vue'
-import DashboardCard07 from '../partials/dashboard/DashboardCard07.vue'
-import { Auth, API } from 'aws-amplify';
+import DashboardCard07B from '../partials/dashboard/DashboardCard07B.vue'
+import { API } from "aws-amplify"
+import { listBookings } from "../graphql/queries"
+
+const cslog = console.log
 
 export default {
   name: 'Dashboard',
@@ -63,15 +66,32 @@ export default {
     Header,
     FilterButton,
     Datepicker,
-    DashboardCard07,
+    DashboardCard07B,
   },
   data() {
     return {
-      username: "dangkhoa240899@gmail.com",
-      password: "khoa12345678",
-      email: "dangkhoa240899@gmail.com",
-      phone_number: "",
+      bookings: [],
+      bookingsShowned: [],
     }
+  },
+  async created() {
+    const bookingsRes = await API.graphql({
+      query: listBookings,
+    })
+
+    cslog(bookingsRes)
+    const allBookings = bookingsRes.data.listBookings.items // .filter(v => v.published).filter(v => filterF(v))
+
+    this.bookings = allBookings
+    this.bookingsShowned = allBookings
+  },
+  methods: {
+    updateList([startDate, endDate]) {
+      this.bookingsShowned = this.bookings.filter(v =>
+        new Date(v.createdAt).getTime() >= startDate.getTime()
+        && new Date(v.createdAt).getTime() <= endDate.getTime()
+      )
+    },
   },
   setup() {
     const sidebarOpen = ref(false)

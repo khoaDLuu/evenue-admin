@@ -1,7 +1,7 @@
 <template>
   <div class="col-span-full xl:col-span-8 bg-white shadow-lg rounded-sm border border-gray-200">
     <header class="px-5 py-4 border-b border-gray-100">
-      <h2 class="font-semibold text-gray-800">Venue List</h2>
+      <h2 class="font-semibold text-gray-800">Booking List</h2>
     </header>
     <div class="p-3">
 
@@ -12,58 +12,54 @@
           <thead class="text-xs uppercase text-gray-400 bg-gray-50 rounded-sm">
             <tr>
               <th class="p-2">
-                <div class="font-semibold text-left">Name</div>
+                <div class="font-semibold text-left">User</div>
               </th>
               <th class="p-2">
-                <div class="font-semibold text-left">City</div>
+                <div class="font-semibold text-left">Venue</div>
               </th>
               <th class="p-2">
-                <div class="font-semibold text-left">Type</div>
+                <div class="font-semibold text-left">Time</div>
               </th>
               <th class="p-2">
-                <div class="font-semibold text-left">Owner Email</div>
+                <div class="font-semibold text-left">Total Charge</div>
               </th>
               <th class="p-2">
-                <div class="font-semibold text-center">Date Created</div>
+                <div class="font-semibold text-center">Date Booked</div>
               </th>
               <th class="p-2">
-                <div class="font-semibold text-center">Action</div>
+                <div class="font-semibold text-center">Status</div>
               </th>
             </tr>
           </thead>
           <!-- Table body -->
           <tbody class="text-sm font-medium divide-y divide-gray-100">
             <!-- Row -->
-            <tr v-for="venue in venues" :key="venue.id">
-              <td class="p-2">
-                <div class="flex items-center">
-                  <div class="text-gray-800">{{ venue.name }}</div>
-                  <div class="text-center text-light-blue-500 inline-block">
-                    <span v-if="venue.published" class="text-lg text-green-600">&nbsp;&nbsp;&bull;</span>
-                    <span v-else class="text-md text-gray-600 font-bold">&nbsp;&nbsp;&#8211;</span>
-                  </div>
-                </div>
-              </td>
-              <td class="p-2">
-                <div class="">{{ venue.city }}</div>
-              </td>
-              <td class="p-2">
-                <div class="">{{ venue.type.name }}</div>
-              </td>
+            <tr v-for="booking in bookings" :key="booking.id">
               <td class="p-2">
                 <div class="">
-                  <a class="text-blue-400" :href="`mailto:${ venue.owner }`" target="_blank">
-                  {{ venue.owner }}
+                  <a class="text-blue-400" :href="`mailto:${ booking.user }`" target="_blank">
+                  {{ booking.user }}
                   </a>
                 </div>
               </td>
               <td class="p-2">
+                <div class="">{{ booking.venue || "ABC" }}</div>
+              </td>
+              <td class="p-2">
                 <div class="text-center">
-                  {{ new Date(venue.createdAt).toLocaleString("en", {year: "numeric", month: "2-digit", day: "numeric"}) }}
+                  {{ new Date(booking.checkIn).toLocaleString() }} - {{ new Date(booking.checkOut).toLocaleString() }}
                 </div>
               </td>
               <td class="p-2">
-                <div class="text-center text-light-blue-500"><a _target="blank" :href="`https://evenuefs.tk/venues/${venue.id}`">View</a></div>
+                <div class="">${{ booking.totalCharge }}</div>
+              </td>
+              <td class="p-2">
+                <div class="text-center">
+                  {{ new Date(booking.createdAt).toLocaleString("en", {year: "numeric", month: "2-digit", day: "numeric"}) }}
+                </div>
+              </td>
+              <td class="p-2">
+                <div class="text-center text-light-blue-500"><a _target="blank" :href="`https://evenuefs.tk/venues/${booking.id}`">View</a></div>
               </td>
             </tr>
           </tbody>
@@ -81,9 +77,9 @@
               Showing
               <span class="font-medium">1</span>
               to
-              <span class="font-medium">{{ venues.length > 10 ? 10 : venues.length }}</span>
+              <span class="font-medium">{{ bookings.length > 10 ? 10 : bookings.length }}</span>
               of
-              <span class="font-medium">{{ venues.length }}</span>
+              <span class="font-medium">{{ bookings.length }}</span>
               results
             </p>
           </div>
@@ -122,9 +118,9 @@
 
 <script>
 export default {
-  name: 'DashboardCard07',
+  name: 'DashboardCard07B',
   props: {
-    venues: {
+    bookings: {
       type: Array,
       default: [],
     }
