@@ -54,8 +54,7 @@ import Header from '../partials/Header.vue'
 import FilterButton from '../components/DropdownFilter.vue'
 import Datepicker from '../components/Datepicker.vue'
 import DashboardCard10 from '../partials/dashboard/DashboardCard10.vue'
-import { Auth, API } from 'aws-amplify';
-// import { listUsers } from "../graphql/queries"  // list users / admin queries
+import { Auth, API } from 'aws-amplify'
 
 const cslog = console.log
 
@@ -74,25 +73,37 @@ export default {
       usersShowned: [],
     }
   },
-  // async created() {
-  //   const usersRes = await API.graphql({
-  //     query: listUsers,
-  //   })
-
-  //   cslog(usersRes)
-  //   const allUsers = usersRes.data.listUsers.items // .filter(v => v.published).filter(v => filterF(v))
-
-  //   this.users = allUsers
-  //   this.usersShowned = allUsers
-  // },
-  // methods: {
-  //   updateList([startDate, endDate]) {
-  //     this.usersShowned = this.users.filter(v =>
-  //       new Date(v.createdAt).getTime() >= startDate.getTime()
-  //       && new Date(v.createdAt).getTime() <= endDate.getTime()
-  //     )
-  //   },
-  // },
+  async created() {
+    await this.pullUsers()
+  },
+  methods: {
+    updateList([startDate, endDate]) {
+      this.usersShowned = this.users.filter(v =>
+        new Date(v.UserCreateDate).getTime() >= startDate.getTime()
+        && new Date(v.UserCreateDate).getTime() <= endDate.getTime()
+      )
+    },
+  },
+  methods: {
+    async pullUsers() {
+      const apiName = 'AdminQueries'
+      const path = '/listUsers'
+      const myInit = {
+        headers: {
+          'Content-Type' : 'application/json',
+          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+        }
+      }
+      try {
+        this.users = (await API.get(apiName, path, myInit)).Users
+        this.usersShowned = this.users
+        cslog(this.users)
+      }
+      catch (e) {
+        cslog(e)
+      }
+    },
+  },
   setup() {
     const sidebarOpen = ref(false)
     return {

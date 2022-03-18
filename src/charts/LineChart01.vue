@@ -21,7 +21,7 @@ export default {
 
     const canvas = ref(null)
     let chart = null
-    
+
     onMounted(() => {
       const ctx = canvas.value
       chart = new Chart(ctx, {
@@ -52,7 +52,7 @@ export default {
             tooltip: {
               callbacks: {
                 title: () => false, // Disable tooltip title
-                label: (context) => formatValue(context.parsed.y),
+                label: (context) => ` ${context.parsed.y}`,
               },
             },
             legend: {

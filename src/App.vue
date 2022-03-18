@@ -1,6 +1,28 @@
 <script setup>
-import { Authenticator } from "@aws-amplify/ui-vue";
-import "@aws-amplify/ui-vue/styles.css";
+import { Authenticator } from "@aws-amplify/ui-vue"
+import "@aws-amplify/ui-vue/styles.css"
+import { Auth, Hub } from 'aws-amplify'
+
+let user = undefined
+
+Hub.listen('auth', async (data) => {
+  // console.log(data)
+  // Another dirty hack to prevent unadmin access
+  switch (data.payload.event) {
+    case 'signIn':
+      if (data.payload.data.username != "dangkhoa240899+admin1@gmail.com") {
+        await Auth.signOut()
+      }
+      else {
+        user = data.payload.data
+      }
+      break
+    case 'signOut':
+      user = undefined
+      break
+  }
+  console.log(user)
+})
 </script>
 
 <template>

@@ -19,7 +19,7 @@
       <h2 class="text-lg font-semibold text-gray-800 mb-2">Venues</h2>
       <div class="text-xs font-semibold text-gray-400 uppercase mb-1">Published</div>
       <div class="flex items-start">
-        <div class="text-3xl font-bold text-gray-800 mr-2">10</div>
+        <div class="text-3xl font-bold text-gray-800 mr-2">{{ venues.length }}</div>
         <!-- <div class="text-sm font-semibold text-white px-1.5 bg-yellow-500 rounded-full">-14%</div> -->
       </div>
     </div>
@@ -40,34 +40,46 @@ import EditMenu from '../../components/DropdownEditMenu.vue'
 // Import utilities
 import { tailwindConfig, hexToRGB } from '../../utils/Utils'
 
+import { Auth, API } from 'aws-amplify'
+import { listVenues, listBookings } from "../../graphql/queries"
+import { GRAPHQL_AUTH_MODE } from "@aws-amplify/api"
+
+const cslog = console.log
+
 export default {
   name: 'DashboardCard01',
   components: {
     LineChart,
     EditMenu,
   },
-  setup() {
-    const chartData = ref({
-      labels: [
-        '12-01-2020', '01-01-2021', '02-01-2021',
-        '03-01-2021', '04-01-2021', '05-01-2021',
-        '06-01-2021', '07-01-2021', '08-01-2021',
-        '09-01-2021', '10-01-2021', '11-01-2021',
-        '12-01-2021', '01-01-2022', '02-01-2022',
-        '03-01-2022', '04-01-2022', '05-01-2022',
-        '06-01-2022', '07-01-2022', '08-01-2022',
-        '09-01-2022', '10-01-2022', '11-01-2022',
-        '12-01-2022', '01-01-2023',
-      ],
+  props: {
+    venues: {
+      type: Array,
+      default: [],
+    }
+  },
+  data() {
+    return {
+      chartData: {},
+    }
+  },
+  async created() {
+    // const groupedByDate = [...this.venues].sort((u1, u2) => u1.createdAt > u2.createdAt ? 1 : -1).reduce(
+    //   (entryMap, u) => entryMap.set(
+    //     u.createdAt.split("T")[0],
+    //     (entryMap.get(u.createdAt.split("T")[0]) || 0) + 1 // grouping logic
+    //   ),
+    //   new Map()
+    // )
+    // cslog(groupedByDate)
+    // cslog([...groupedByDate.keys()].map(d => d.split("-").reverse().join("-")))
+
+    this.chartData = {
+      labels: ['12-01-2020', '01-01-2021', '02-01-2021','03-01-2021','04-01-2021','07-01-2021'],
       datasets: [
-        // Indigo line
         {
-          data: [
-            622, 622, 426, 471, 365, 365, 238,
-            324, 288, 206, 324, 324, 500, 409,
-            409, 273, 232, 273, 500, 570, 767,
-            808, 685, 767, 685, 685,
-          ],
+          label: '',
+          data: [1, 1, 1, 2, 1, 2],
           fill: true,
           backgroundColor: `rgba(${hexToRGB(tailwindConfig().theme.colors.blue[500])}, 0.08)`,
           borderColor: tailwindConfig().theme.colors.indigo[500],
@@ -78,27 +90,7 @@ export default {
           pointBackgroundColor: tailwindConfig().theme.colors.indigo[500],
           clip: 20,
         },
-        // Gray line
-        {
-        data: [
-          732, 610, 610, 504, 504, 504, 349,
-          349, 504, 342, 504, 610, 391, 192,
-          154, 273, 191, 191, 126, 263, 349,
-          252, 423, 622, 470, 532,
-        ],
-          borderColor: tailwindConfig().theme.colors.gray[300],
-          borderWidth: 2,
-          tension: 0,
-          pointRadius: 0,
-          pointHoverRadius: 3,
-          pointBackgroundColor: tailwindConfig().theme.colors.gray[300],
-          clip: 20,
-        },
       ],
-    })
-
-    return {
-      chartData,
     }
   }
 }

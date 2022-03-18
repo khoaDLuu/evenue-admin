@@ -18,13 +18,13 @@
                 <div class="font-semibold text-left">Venue</div>
               </th>
               <th class="p-2">
+                <div class="font-semibold text-center">Date Booked</div>
+              </th>
+              <th class="p-2">
                 <div class="font-semibold text-left">Time</div>
               </th>
               <th class="p-2">
                 <div class="font-semibold text-left">Total Charge</div>
-              </th>
-              <th class="p-2">
-                <div class="font-semibold text-center">Date Booked</div>
               </th>
               <th class="p-2">
                 <div class="font-semibold text-center">Status</div>
@@ -37,21 +37,13 @@
             <tr v-for="booking in bookings" :key="booking.id">
               <td class="p-2">
                 <div class="">
-                  <a class="text-blue-400" :href="`mailto:${ booking.user }`" target="_blank">
-                  {{ booking.user }}
+                  <a class="text-blue-400" :href="`mailto:${ booking.owner }`" target="_blank">
+                  {{ booking.owner }}
                   </a>
                 </div>
               </td>
               <td class="p-2">
-                <div class="">{{ booking.venue || "ABC" }}</div>
-              </td>
-              <td class="p-2">
-                <div class="text-center">
-                  {{ new Date(booking.checkIn).toLocaleString() }} - {{ new Date(booking.checkOut).toLocaleString() }}
-                </div>
-              </td>
-              <td class="p-2">
-                <div class="">${{ booking.totalCharge }}</div>
+                <div class="text-center text-light-blue-500"><a _target="blank" :href="`https://evenuefs.tk/venues/${booking.venueId}`">View</a></div>
               </td>
               <td class="p-2">
                 <div class="text-center">
@@ -59,7 +51,24 @@
                 </div>
               </td>
               <td class="p-2">
-                <div class="text-center text-light-blue-500"><a _target="blank" :href="`https://evenuefs.tk/venues/${booking.id}`">View</a></div>
+                <div class="text-left">
+                  {{ new Date(booking.checkIn).toLocaleString() }} -<br>
+                  {{ new Date(booking.checkOut).toLocaleString() }}
+                </div>
+              </td>
+              <td class="p-2">
+                <div class="">${{ booking.totalCharge }}</div>
+              </td>
+              <td class="p-2">
+                <div v-if="booking.status == 'CONFIRMED'" class="text-center text-green-500">
+                  {{ booking.status }}
+                </div>
+                <div v-else-if="booking.status == 'PENDING'" class="text-center text-yellow-500">
+                  {{ booking.status }}
+                </div>
+                <div v-else-if="booking.status == 'CANCELED'" class="text-center text-red-500">
+                  {{ booking.status }}
+                </div>
               </td>
             </tr>
           </tbody>
@@ -75,9 +84,9 @@
           <div>
             <p class="text-sm text-gray-700">
               Showing
-              <span class="font-medium">1</span>
+              <span class="font-medium">{{ bookings.length ? 1 : 0 }}</span>
               to
-              <span class="font-medium">{{ bookings.length > 10 ? 10 : bookings.length }}</span>
+              <span class="font-medium">{{ bookings.length }}</span>
               of
               <span class="font-medium">{{ bookings.length }}</span>
               results

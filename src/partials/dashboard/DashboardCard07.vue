@@ -79,9 +79,9 @@
           <div>
             <p class="text-sm text-gray-700">
               Showing
-              <span class="font-medium">1</span>
+              <span class="font-medium">{{ venues.length ? 1 : 0 }}</span>
               to
-              <span class="font-medium">{{ venues.length > 10 ? 10 : venues.length }}</span>
+              <span class="font-medium">{{ venues.length }}</span>
               of
               <span class="font-medium">{{ venues.length }}</span>
               results

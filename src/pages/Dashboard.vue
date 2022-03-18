@@ -42,21 +42,21 @@
           <div class="grid grid-cols-12 gap-6">
 
             <!-- Line chart (Users) -->
-            <DashboardCard01 />
+            <DashboardCard01 :users="allUsers" />
             <!-- Line chart (Venues) -->
-            <DashboardCard02 />
+            <DashboardCard02 :venues="allVenues" />
             <!-- Line chart (Bookings) -->
-            <DashboardCard03 />
+            <DashboardCard03 :bookings="allBookings" />
             <!-- Card (Recent Events) -->
-            <DashboardCard12 />
+            <!-- <DashboardCard12 /> -->
             <!-- Card (Recent Ratings) -->
-            <DashboardCard13 />
+            <!-- <DashboardCard13 /> -->
             <!-- Line chart (Booking Revenue) -->
-            <DashboardCard08 />
+            <!-- <DashboardCard08 /> -->
             <!-- Card (Bookings By Status)   -->
-            <DashboardCard11 />
+            <!-- <DashboardCard11 /> -->
             <!-- Doughnut chart (Top Venue Areas) -->
-            <DashboardCard06 />
+            <!-- <DashboardCard06 /> -->
 
           </div>
 
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+// import { ref, onMounted, reactive } from 'vue'
 import Sidebar from '../partials/Sidebar.vue'
 import Header from '../partials/Header.vue'
 import DashboardAvatars from '../partials/dashboard/DashboardAvatars.vue'
@@ -87,7 +87,11 @@ import DashboardCard10 from '../partials/dashboard/DashboardCard10.vue'
 import DashboardCard11 from '../partials/dashboard/DashboardCard11.vue'
 import DashboardCard12 from '../partials/dashboard/DashboardCard12.vue'
 import DashboardCard13 from '../partials/dashboard/DashboardCard13.vue'
-import { Auth } from 'aws-amplify';
+import { Auth, API } from 'aws-amplify'
+import { listVenues, listBookings } from "../graphql/queries"
+import { GRAPHQL_AUTH_MODE } from "@aws-amplify/api"
+
+const cslog = console.log
 
 export default {
   name: 'Dashboard',
@@ -113,25 +117,60 @@ export default {
   },
   data() {
     return {
-      username: "dangkhoa240899@gmail.com",
+      username: "dangkhoa240899+admin1@gmail.com",
       password: "khoa12345678",
-      email: "dangkhoa240899@gmail.com",
+      email: "dangkhoa240899+admin1@gmail.com",
       phone_number: "",
+      allUsers: [],
+      allVenues: [],
+      allBookings: [],
+      sidebarOpen: false,
     }
   },
-  setup() {
-    const sidebarOpen = ref(false)
-    return {
-      sidebarOpen,
-    }
+  async created() {
+    await Promise.all([
+      this.pullUsers(),
+      this.pullData(listVenues, "listVenues"),
+      this.pullData(listBookings, "listBookings"),
+    ])
   },
-  // async created() {
-  //   try {
-  //     const user = await Auth.signIn(this.username, this.password);
-  //     console.log(user);
-  //   } catch (error) {
-  //     console.log('error signing up:', error);
-  //   }
-  // }
+  methods: {
+    async pullUsers() {
+      const apiName = 'AdminQueries'
+      const path = '/listUsers'
+      const myInit = {
+        headers: {
+          'Content-Type' : 'application/json',
+          Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}`
+        }
+      }
+      try {
+        this.allUsers = (await API.get(apiName, path, myInit)).Users
+        cslog(this.allUsers)
+      }
+      catch (e) {
+        cslog(e)
+      }
+    },
+    async pullData(query, queryName) {
+      try {
+        const res = await API.graphql({
+          query: query,
+          authMode: GRAPHQL_AUTH_MODE.API_KEY,
+        })
+        const allData = res.data[queryName].items
+        if (queryName === "listVenues") {
+          this.allVenues = allData.filter(v => v.published)
+        }
+        else {
+          this.allBookings = allData
+        }
+        cslog(allData)
+      }
+      catch (e) {
+        cslog(e)
+      }
+    },
+  },
 }
 </script>
