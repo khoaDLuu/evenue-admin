@@ -2,6 +2,7 @@
 import { Authenticator } from "@aws-amplify/ui-vue"
 import "@aws-amplify/ui-vue/styles.css"
 import { Auth, Hub } from 'aws-amplify'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 let user = undefined
 
@@ -22,6 +23,20 @@ Hub.listen('auth', async (data) => {
       break
   }
   console.log(user)
+})
+
+onMounted(async () => {
+  user = await Auth.currentAuthenticatedUser()
+  if (user.username != "dangkhoa240899+admin1@gmail.com") {
+    await Auth.signOut()
+  }
+})
+
+onUnmounted(async () => {
+  user = await Auth.currentAuthenticatedUser()
+  if (user.username != "dangkhoa240899+admin1@gmail.com") {
+    await Auth.signOut()
+  }
 })
 </script>
 
